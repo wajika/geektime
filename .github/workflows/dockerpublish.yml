@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: login docker
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      run: echo ${{ secrets.CCR_PASSWORD }} | docker login -u ${{ secrets.CCR_USERNAME }} --password-stdin ccr.ccs.tencentyun.com
     - name: docker register
       run: docker info
     - name: Build the Docker image
