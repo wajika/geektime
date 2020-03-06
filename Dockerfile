@@ -6,7 +6,7 @@ RUN apk add --no-cache --virtual .build-deps build-base linux-headers \
 RUN pip install -U geektime_dl
 
 FROM ubuntu:latest
-COPY geektime
+COPY geektime geektime
 
 WORKDIR /output
-ENTRYPOINT ["geektime"]
+ENTRYPOINT ["/bin/bash"]
