@@ -12,3 +12,5 @@ jobs:
       run: docker info
     - name: Build the Docker image
       run: docker build -t wajika/geektime:latest .
+    - name: docker push
+      run: docker push wajika/geektime:latest
