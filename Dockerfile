@@ -13,4 +13,3 @@ RUN ls /usr/local/python37/lib/python3.7/site-packages
 
 #WORKDIR /output
 #ENTRYPOINT ["geektime"]
-~                         
