@@ -1,4 +1,4 @@
-name: Python package
+name: CI & CD
 
 on: fork
 #on:
@@ -7,13 +7,12 @@ on: fork
 #    - master
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
       matrix:
-        python-version: [3.5, 3.6, 3.7]
+        python-version: [3.7]
 
     steps:
     - uses: actions/checkout@v1
@@ -36,3 +35,30 @@ jobs:
       run: |
         pip install -r requirements/dev.txt
         python -m pytest
+
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Build project
+        run: |
+          cd docs
+          npm install
+          npm run docs:build
+
+      - name: Upload gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/.vuepress/dist
+
